@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import io.kafbat.ui.AbstractIntegrationTest;
+import io.kafbat.ui.config.UiProperties;
 import io.kafbat.ui.util.DynamicConfigOperations;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ class ApplicationInfoServiceTest extends AbstractIntegrationTest {
     var service2 = new ApplicationInfoService(
         dynamicConfigOperations,
         null,
+        new UiProperties(),
         null,
         null,
         false,
@@ -38,6 +40,7 @@ class ApplicationInfoServiceTest extends AbstractIntegrationTest {
     assertNull(appInfo.getLatestRelease(), "latest release should be NULL when disabled");
     assertNotNull(appInfo.getBuild(), "build info must not be NULL");
     assertNotNull(appInfo.getEnabledFeatures(), "enabled features must not be NULL");
+    assertNotNull(appInfo.getUi(), "UI settings must not be NULL");
   }
 
 }
