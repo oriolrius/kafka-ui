@@ -1,6 +1,8 @@
 import React, { type FC } from 'react';
 import { useClusters } from 'lib/hooks/api/clusters';
 import useCurrentClusterName from 'lib/hooks/useCurrentClusterName';
+import UserIcon from 'components/common/Icons/UserIcon';
+import LogoutIcon from 'components/common/Icons/LogoutIcon';
 
 import * as S from './Nav.styled';
 import MenuItem from './Menu/MenuItem';
@@ -11,7 +13,7 @@ const Nav: FC = () => {
   const clusterName = useCurrentClusterName();
 
   return (
-    <aside aria-label="Sidebar Menu">
+    <S.NavContainer aria-label="Sidebar Menu">
       <S.List>
         <MenuItem variant="primary" to="/" title="Dashboard" />
       </S.List>
@@ -25,7 +27,17 @@ const Nav: FC = () => {
             opened={clusters.data.length === 1 || cluster.name === clusterName}
           />
         ))}
-    </aside>
+      <S.UserMenuWrapper>
+        <S.UserMenuItem href="https://iam.demo.m3.nexiona.io/realms/server/account" target="_blank" rel="noopener noreferrer">
+          <UserIcon />
+          Account
+        </S.UserMenuItem>
+        <S.UserMenuItem href="https://console.demo.m3.nexiona.io/oauth2/sign_out">
+          <LogoutIcon />
+          Logout
+        </S.UserMenuItem>
+      </S.UserMenuWrapper>
+    </S.NavContainer>
   );
 };
 
