@@ -1,0 +1,33 @@
+# Example configuration for UI customization
+# This file demonstrates how to configure the user menu and social links in Kafka UI
+
+ui:
+  # User menu configuration (appears at the bottom of left sidebar)
+  userMenu:
+    enabled: true  # Set to false to hide the user menu completely
+    accountUrl: "https://iam.demo.m3.nexiona.io/realms/server/account"  # URL for the account page
+    logoutUrl: "https://console.demo.m3.nexiona.io/oauth2/sign_out"  # URL for logout
+
+  # Social links configuration (appears in the top right navbar)
+  socialLinks:
+    enabled: true  # Set to false to hide all social links
+    githubUrl: "https://github.com/kafbat/kafka-ui"
+    discordUrl: "https://discord.com/invite/4DWzD7pGE5"
+    productHuntUrl: "https://producthunt.com/products/ui-for-apache-kafka"
+
+# To disable user menu entirely:
+# ui:
+#   userMenu:
+#     enabled: false
+
+# To disable social links entirely:
+# ui:
+#   socialLinks:
+#     enabled: false
+
+# To customize only specific URLs (others will use defaults):
+# ui:
+#   socialLinks:
+#     enabled: true
+#     githubUrl: "https://github.com/your-org/your-repo"
+#     # discordUrl and productHuntUrl will use default values

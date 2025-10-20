@@ -8,10 +8,14 @@ import static io.kafbat.ui.util.GithubReleaseInfo.GITHUB_RELEASE_INFO_TIMEOUT;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Streams;
+import io.kafbat.ui.config.UiProperties;
 import io.kafbat.ui.model.AppAuthenticationSettingsDTO;
 import io.kafbat.ui.model.ApplicationInfoBuildDTO;
 import io.kafbat.ui.model.ApplicationInfoDTO;
 import io.kafbat.ui.model.ApplicationInfoLatestReleaseDTO;
+import io.kafbat.ui.model.ApplicationInfoUiDTO;
+import io.kafbat.ui.model.ApplicationInfoUiSocialLinksDTO;
+import io.kafbat.ui.model.ApplicationInfoUiUserMenuDTO;
 import io.kafbat.ui.model.AuthTypeDTO;
 import io.kafbat.ui.model.OAuthProviderDTO;
 import io.kafbat.ui.util.DynamicConfigOperations;
@@ -44,15 +48,18 @@ public class ApplicationInfoService {
   private final DynamicConfigOperations dynamicConfigOperations;
   private final BuildProperties buildProperties;
   private final GitProperties gitProperties;
+  private final UiProperties uiProperties;
 
   public ApplicationInfoService(DynamicConfigOperations dynamicConfigOperations,
                                 ApplicationContext applicationContext,
+                                UiProperties uiProperties,
                                 @Autowired(required = false) BuildProperties buildProperties,
                                 @Autowired(required = false) GitProperties gitProperties,
                                 @Value("${" + GITHUB_RELEASE_INFO_ENABLED + ":true}") boolean githubInfoEnabled,
                                 @Value("${" + GITHUB_RELEASE_INFO_TIMEOUT + ":10}") int githubApiMaxWaitTime) {
     this.applicationContext = applicationContext;
     this.dynamicConfigOperations = dynamicConfigOperations;
+    this.uiProperties = uiProperties;
     this.buildProperties = Optional.ofNullable(buildProperties).orElse(new BuildProperties(new Properties()));
     this.gitProperties = Optional.ofNullable(gitProperties).orElse(new GitProperties(new Properties()));
     if (githubInfoEnabled) {
@@ -69,7 +76,8 @@ public class ApplicationInfoService {
     return new ApplicationInfoDTO()
         .build(getBuildInfo(releaseInfo))
         .enabledFeatures(getEnabledFeatures())
-        .latestRelease(convert(releaseInfo));
+        .latestRelease(convert(releaseInfo))
+        .ui(getUiSettings());
   }
 
   @Nullable
@@ -103,6 +111,23 @@ public class ApplicationInfoService {
       enabledFeatures.add(EnabledFeaturesEnum.DYNAMIC_CONFIG);
     }
     return enabledFeatures;
+  }
+
+  private ApplicationInfoUiDTO getUiSettings() {
+    var userMenu = new ApplicationInfoUiUserMenuDTO()
+        .enabled(uiProperties.getUserMenu().isEnabled())
+        .accountUrl(uiProperties.getUserMenu().getAccountUrl())
+        .logoutUrl(uiProperties.getUserMenu().getLogoutUrl());
+
+    var socialLinks = new ApplicationInfoUiSocialLinksDTO()
+        .enabled(uiProperties.getSocialLinks().isEnabled())
+        .githubUrl(uiProperties.getSocialLinks().getGithubUrl())
+        .discordUrl(uiProperties.getSocialLinks().getDiscordUrl())
+        .productHuntUrl(uiProperties.getSocialLinks().getProductHuntUrl());
+
+    return new ApplicationInfoUiDTO()
+        .userMenu(userMenu)
+        .socialLinks(socialLinks);
   }
 
   public AppAuthenticationSettingsDTO getAuthenticationProperties() {

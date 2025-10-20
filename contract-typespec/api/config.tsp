@@ -62,6 +62,19 @@ model ApplicationInfo {
     publishedAt?: string;
     htmlUrl?: string;
   };
+  ui?: {
+    userMenu?: {
+      enabled?: boolean;
+      accountUrl?: string;
+      logoutUrl?: string;
+    };
+    socialLinks?: {
+      enabled?: boolean;
+      githubUrl?: string;
+      discordUrl?: string;
+      productHuntUrl?: string;
+    };
+  };
 }
 
 model ApplicationConfig {
