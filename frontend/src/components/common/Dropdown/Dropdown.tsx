@@ -54,7 +54,6 @@ const Dropdown: React.FC<DropdownProps> = ({
       <S.Dropdown
         anchorRef={ref}
         state={isOpen ? 'open' : 'closed'}
-        onMouseLeave={setFalse}
         onClose={() => {
           setFalse();
           onClose?.();
@@ -63,8 +62,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         direction={props.direction || 'bottom'}
         offsetY={offsetY ?? 10}
         viewScroll="auto"
-        overflow="auto"
-        boundingBoxPadding="10"
+        overflow="visible"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

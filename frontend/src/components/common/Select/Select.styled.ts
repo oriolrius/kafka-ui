@@ -71,7 +71,7 @@ export const SelectedOptionWrapper = styled.div`
 export const OptionList = styled.ul`
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   max-height: 228px;
   margin-top: 4px;
   background-color: ${({ theme }) => theme.select.backgroundColor.normal};

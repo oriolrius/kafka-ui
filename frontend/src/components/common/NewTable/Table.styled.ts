@@ -20,9 +20,9 @@ export const ExpaderButton = styled.svg<{
 );
 
 interface ThProps {
-  sortable?: boolean;
-  sortOrder?: 'desc' | 'asc' | false;
-  expander?: boolean;
+  $sortable?: boolean;
+  $sortOrder?: 'desc' | 'asc' | false;
+  $expander?: boolean;
 }
 
 const sortableMixin = (normalColor: string, hoverColor: string) => `
@@ -110,9 +110,9 @@ export const Th = styled.th<ThProps>(
     theme: {
       table: { th },
     },
-    sortable,
-    sortOrder,
-    expander,
+    $sortable,
+    $sortOrder,
+    $expander,
   }) => `
   padding: 8px 0 8px 24px;
   border-bottom-width: 1px;
@@ -126,16 +126,16 @@ export const Th = styled.th<ThProps>(
   letter-spacing: 0em;
   text-align: left;
   background: ${th.backgroundColor.normal};
-  width: ${expander ? '5px' : 'auto'};
+  width: ${$expander ? '5px' : 'auto'};
   white-space: nowrap;
   position: relative;
 
   & > ${TableHeaderContent} {
     cursor: default;
     color: ${th.color.normal};
-    ${sortable ? sortableMixin(th.color.sortable, th.color.hover) : ''}
-    ${sortable && sortOrder === 'asc' && ASCMixin(th.color.active)}
-    ${sortable && sortOrder === 'desc' && DESCMixin(th.color.active)}
+    ${$sortable ? sortableMixin(th.color.sortable, th.color.hover) : ''}
+    ${$sortable && $sortOrder === 'asc' && ASCMixin(th.color.active)}
+    ${$sortable && $sortOrder === 'desc' && DESCMixin(th.color.active)}
   }
 
   &:hover > ${ColumnResizer} {

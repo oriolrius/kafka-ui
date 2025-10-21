@@ -11,7 +11,7 @@ export const ContentContainer = styled.div`
   display: flex;
   width: 320px;
   flex-direction: column;
-  max-height: 640px;
+  max-height: min(640px, calc(100vh - 100px));
   gap: 8px;
 `;
 

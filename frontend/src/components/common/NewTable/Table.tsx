@@ -329,15 +329,15 @@ function Table<TData>({
                   </S.Th>
                 )}
                 {table.getCanSomeRowsExpand() && (
-                  <S.Th expander key={`${headerGroup.id}-expander`} />
+                  <S.Th $expander key={`${headerGroup.id}-expander`} />
                 )}
                 {headerGroup.headers.map((header) => {
                   return (
                     <S.Th
                       key={header.id}
                       colSpan={header.colSpan}
-                      sortable={header.column.getCanSort()}
-                      sortOrder={header.column.getIsSorted()}
+                      $sortable={header.column.getCanSort()}
+                      $sortOrder={header.column.getIsSorted()}
                       style={{
                         width: `calc(var(--header-${header?.id}-size) * 1px)`,
                         maxWidth: header.column.columnDef.maxSize,
