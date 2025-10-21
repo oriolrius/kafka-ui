@@ -9,6 +9,7 @@ Kafka UI supports extensive customization through configuration properties that 
 1. **Application Branding** - Custom titles and logos
 2. **User Menu** - Account and logout links in the sidebar
 3. **Social Links** - GitHub, Discord, and ProductHunt icons in the navbar
+4. **Custom Menu Items** - Add custom links to external tools in the sidebar
 
 ## Implementation Architecture
 
@@ -48,6 +49,7 @@ public class UiProperties {
 
 - Renders configurable user menu
 - Conditionally shows account/logout links
+- Displays custom menu items linking to external tools
 
 **Logo Component**: `frontend/src/components/common/Logo/Logo.tsx`
 
@@ -106,6 +108,52 @@ ui:
     discordUrl: "https://discord.gg/your-server"
     # ProductHunt omitted - won't be displayed
 ```
+
+### Custom Menu Items Configuration
+
+Add custom links to external tools in the left sidebar navigation. Items appear above the user menu.
+
+| Configuration | Type | Description |
+|--------------|------|-------------|
+| `ui.customMenuItems[].label` | String | Display text for the menu item |
+| `ui.customMenuItems[].url` | String | Target URL (opens in new tab) |
+| `ui.customMenuItems[].icon` | String (optional) | Emoji or icon to display |
+
+**YAML Example:**
+
+```yaml
+ui:
+  customMenuItems:
+    - label: "Scheduler"
+      url: "https://wsl.ymbihq.local:3012"
+      icon: "⏰"
+    - label: "Monitoring"
+      url: "https://grafana.example.com"
+      icon: "📊"
+    - label: "Documentation"
+      url: "https://docs.example.com"
+      icon: "📚"
+```
+
+**Environment Variables:**
+
+For environment variables, use indexed notation:
+
+```bash
+UI_CUSTOMMENU ITEMS_0_LABEL="Scheduler"
+UI_CUSTOMMENUITEMS_0_URL="https://wsl.ymbihq.local:3012"
+UI_CUSTOMMENUITEMS_0_ICON="⏰"
+UI_CUSTOMMENUITEMS_1_LABEL="Monitoring"
+UI_CUSTOMMENUITEMS_1_URL="https://grafana.example.com"
+UI_CUSTOMMENUITEMS_1_ICON="📊"
+```
+
+**Behavior:**
+
+- All links open in a new tab with `target="_blank"`
+- Icon is optional - if omitted, only the label is shown
+- Items are displayed in the order they are defined
+- Menu section only appears if at least one item is configured
 
 ## Docker Deployment
 

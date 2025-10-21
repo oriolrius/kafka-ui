@@ -14,6 +14,7 @@ const Nav: FC = () => {
   const clusterName = useCurrentClusterName();
   const appInfo = useAppInfo();
   const userMenu = appInfo.data?.response.ui?.userMenu;
+  const customMenuItems = appInfo.data?.response.ui?.customMenuItems || [];
 
   return (
     <S.NavContainer aria-label="Sidebar Menu">
@@ -30,6 +31,21 @@ const Nav: FC = () => {
             opened={clusters.data.length === 1 || cluster.name === clusterName}
           />
         ))}
+      {customMenuItems.length > 0 && (
+        <S.CustomMenuWrapper>
+          {customMenuItems.map((item) => (
+            <S.UserMenuItem
+              key={`${item.label}-${item.url}`}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {item.icon && <span>{item.icon}</span>}
+              {item.label}
+            </S.UserMenuItem>
+          ))}
+        </S.CustomMenuWrapper>
+      )}
       {userMenu?.enabled && (
         <S.UserMenuWrapper>
           {userMenu.accountUrl && (

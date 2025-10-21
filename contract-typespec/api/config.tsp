@@ -75,6 +75,11 @@ model ApplicationInfo {
       discordUrl?: string;
       productHuntUrl?: string;
     };
+    customMenuItems?: {
+      label?: string;
+      url?: string;
+      icon?: string;
+    }[];
   };
 }
 

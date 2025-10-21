@@ -27,8 +27,15 @@ export const ClusterList = styled.ul.attrs<{ $colorKey: ClusterColorKey }>({
     theme.clusterMenu.backgroundColor[$colorKey]};
 `;
 
-export const UserMenuWrapper = styled.div`
+export const CustomMenuWrapper = styled.div`
   margin-top: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-top: 1px solid
+    ${({ theme }) => theme.menu.secondary.backgroundColor.hover};
+`;
+
+export const UserMenuWrapper = styled.div`
   padding-top: 8px;
   border-top: 1px solid
     ${({ theme }) => theme.menu.secondary.backgroundColor.hover};

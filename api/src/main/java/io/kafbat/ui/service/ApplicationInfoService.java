@@ -14,6 +14,7 @@ import io.kafbat.ui.model.ApplicationInfoBuildDTO;
 import io.kafbat.ui.model.ApplicationInfoDTO;
 import io.kafbat.ui.model.ApplicationInfoLatestReleaseDTO;
 import io.kafbat.ui.model.ApplicationInfoUiDTO;
+import io.kafbat.ui.model.ApplicationInfoUiCustomMenuItemsInnerDTO;
 import io.kafbat.ui.model.ApplicationInfoUiSocialLinksDTO;
 import io.kafbat.ui.model.ApplicationInfoUiUserMenuDTO;
 import io.kafbat.ui.model.AuthTypeDTO;
@@ -125,10 +126,18 @@ public class ApplicationInfoService {
         .discordUrl(uiProperties.getSocialLinks().getDiscordUrl())
         .productHuntUrl(uiProperties.getSocialLinks().getProductHuntUrl());
 
+    var customMenuItems = uiProperties.getCustomMenuItems().stream()
+        .map(item -> new ApplicationInfoUiCustomMenuItemsInnerDTO()
+            .label(item.getLabel())
+            .url(item.getUrl())
+            .icon(item.getIcon()))
+        .toList();
+
     return new ApplicationInfoUiDTO()
         .title(uiProperties.getTitle())
         .userMenu(userMenu)
-        .socialLinks(socialLinks);
+        .socialLinks(socialLinks)
+        .customMenuItems(customMenuItems);
   }
 
   public AppAuthenticationSettingsDTO getAuthenticationProperties() {
