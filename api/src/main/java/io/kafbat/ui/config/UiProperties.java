@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class UiProperties {
 
+  private String title = "Kafka Console";
   private UserMenu userMenu = new UserMenu();
   private SocialLinks socialLinks = new SocialLinks();
 

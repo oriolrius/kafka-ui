@@ -63,6 +63,7 @@ model ApplicationInfo {
     htmlUrl?: string;
   };
   ui?: {
+    title?: string;
     userMenu?: {
       enabled?: boolean;
       accountUrl?: string;

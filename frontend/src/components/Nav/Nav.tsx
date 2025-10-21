@@ -33,7 +33,11 @@ const Nav: FC = () => {
       {userMenu?.enabled && (
         <S.UserMenuWrapper>
           {userMenu.accountUrl && (
-            <S.UserMenuItem href={userMenu.accountUrl} target="_blank" rel="noopener noreferrer">
+            <S.UserMenuItem
+              href={userMenu.accountUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <UserIcon />
               Account
             </S.UserMenuItem>

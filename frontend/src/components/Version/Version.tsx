@@ -1,11 +1,12 @@
 import React from 'react';
-import WarningIcon from 'components/common/Icons/WarningIcon';
 import { gitCommitPath } from 'lib/paths';
 import { useLatestVersion } from 'lib/hooks/api/latestVersion';
 import { formatTimestamp } from 'lib/dateTimeHelpers';
 import { useTimezone } from 'lib/hooks/useTimezones';
 
 import * as S from './Version.styled';
+
+const TagIcon: React.FC = () => <span style={{ fontSize: '12px' }}>🏷️</span>;
 
 const Version: React.FC = () => {
   const { currentTimezone } = useTimezone();
@@ -26,11 +27,9 @@ const Version: React.FC = () => {
     <S.Wrapper>
       {isLatestRelease === false && (
         <S.OutdatedWarning
-          title={`Your app version is outdated. Latest version is ${
-            versionTag || 'UNKNOWN'
-          }`}
+          title={`New version available: ${versionTag || 'UNKNOWN'}`}
         >
-          <WarningIcon />
+          <TagIcon />
         </S.OutdatedWarning>
       )}
 

@@ -30,7 +30,8 @@ export const ClusterList = styled.ul.attrs<{ $colorKey: ClusterColorKey }>({
 export const UserMenuWrapper = styled.div`
   margin-top: auto;
   padding-top: 8px;
-  border-top: 1px solid ${({ theme }) => theme.menu.secondary.backgroundColor.hover};
+  border-top: 1px solid
+    ${({ theme }) => theme.menu.secondary.backgroundColor.hover};
 `;
 
 export const UserMenuItem = styled.a`
@@ -47,17 +48,20 @@ export const UserMenuItem = styled.a`
   cursor: pointer;
   text-decoration: none;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.menu.secondary.backgroundColor.normal};
+  background-color: ${({ theme }) =>
+    theme.menu.secondary.backgroundColor.normal};
   color: ${({ theme }) => theme.menu.secondary.color.normal};
   margin-bottom: 4px;
 
   &:hover {
-    background-color: ${({ theme }) => theme.menu.secondary.backgroundColor.hover};
+    background-color: ${({ theme }) =>
+      theme.menu.secondary.backgroundColor.hover};
     color: ${({ theme }) => theme.menu.secondary.color.hover};
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.menu.secondary.backgroundColor.active};
+    background-color: ${({ theme }) =>
+      theme.menu.secondary.backgroundColor.active};
     color: ${({ theme }) => theme.menu.secondary.color.active};
   }
 

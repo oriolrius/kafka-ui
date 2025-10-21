@@ -1,0 +1,32 @@
+# Development configuration for Kafka UI
+# This file contains custom UI settings for local development
+
+# Authentication (disabled for development)
+auth:
+  type: DISABLED
+
+# UI Customization
+ui:
+  # Custom application title
+  title: "My Kafka Console"
+
+  # User menu in left sidebar
+  userMenu:
+    enabled: true
+    accountUrl: "https://iam.demo.m3.nexiona.io/realms/server/account"
+    logoutUrl: "https://console.demo.m3.nexiona.io/oauth2/sign_out"
+
+  # Hide social network links
+  socialLinks:
+    enabled: false
+
+# Dynamic configuration (allows cluster setup via UI)
+dynamic:
+  config:
+    enabled: true
+
+# Logging
+logging:
+  level:
+    root: INFO
+    io.kafbat.ui: DEBUG

@@ -57,6 +57,7 @@ const NavBar: React.FC<Props> = ({ onBurgerClick }) => {
   const { themeMode, setThemeMode } = useContext(ThemeModeContext);
   const appInfo = useAppInfo();
   const socialLinks = appInfo.data?.response.ui?.socialLinks;
+  const appTitle = appInfo.data?.response.ui?.title || 'Kafka Console';
 
   return (
     <S.Navbar role="navigation" aria-label="Page Header">
@@ -68,7 +69,7 @@ const NavBar: React.FC<Props> = ({ onBurgerClick }) => {
 
           <S.Hyperlink to="/">
             <Logo />
-            kafbat UI
+            {appTitle}
           </S.Hyperlink>
 
           <S.NavbarItem>

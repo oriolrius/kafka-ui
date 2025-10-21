@@ -126,6 +126,7 @@ public class ApplicationInfoService {
         .productHuntUrl(uiProperties.getSocialLinks().getProductHuntUrl());
 
     return new ApplicationInfoUiDTO()
+        .title(uiProperties.getTitle())
         .userMenu(userMenu)
         .socialLinks(socialLinks);
   }

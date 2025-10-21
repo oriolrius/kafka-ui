@@ -33,6 +33,12 @@ export default defineConfig(({ mode }) => {
     plugins: isDevMode ? devPlugins : prodPlugins,
     server: {
       port: 3000,
+      host: true,
+      allowedHosts: ['localhost', 'wsl.ymbihq.local', '.ymbihq.local'],
+      hmr: {
+        protocol: 'ws',
+        host: 'localhost',
+      },
     },
     build: {
       outDir: 'build/vite/static',
@@ -86,7 +92,13 @@ export default defineConfig(({ mode }) => {
 
   const proxyDevServerConfig = {
     ...defaultConfig.server,
+    host: true,
+    allowedHosts: ['localhost', 'wsl.ymbihq.local', '.ymbihq.local'],
     open: true,
+    hmr: {
+      protocol: 'ws',
+      host: 'localhost',
+    },
     proxy: {
       '/login': {
         target: isProxy,
