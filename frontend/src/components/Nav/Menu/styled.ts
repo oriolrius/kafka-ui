@@ -17,7 +17,6 @@ export const MenuItem = styled('li').attrs({ role: 'menuitem' })<{
     min-height: 28px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     line-height: 17px;
     user-select: none;
     width: 100%;

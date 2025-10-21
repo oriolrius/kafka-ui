@@ -4,10 +4,17 @@ import useCurrentClusterName from 'lib/hooks/useCurrentClusterName';
 import UserIcon from 'components/common/Icons/UserIcon';
 import LogoutIcon from 'components/common/Icons/LogoutIcon';
 import { useAppInfo } from 'lib/hooks/api/appConfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library, IconName } from '@fortawesome/fontawesome-svg-core';
+import { fas, faGauge } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import * as S from './Nav.styled';
 import MenuItem from './Menu/MenuItem';
 import ClusterMenu from './ClusterMenu/ClusterMenu';
+
+// Add all Font Awesome icons to the library
+library.add(fas, fab);
 
 const Nav: FC = () => {
   const clusters = useClusters();
@@ -19,7 +26,12 @@ const Nav: FC = () => {
   return (
     <S.NavContainer aria-label="Sidebar Menu">
       <S.List>
-        <MenuItem variant="primary" to="/" title="Dashboard" />
+        <MenuItem
+          variant="primary"
+          to="/"
+          title="Dashboard"
+          icon={<FontAwesomeIcon icon={faGauge} />}
+        />
       </S.List>
       {clusters.isSuccess &&
         clusters.data.map((cluster) => (
@@ -40,7 +52,14 @@ const Nav: FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {item.icon && <span>{item.icon}</span>}
+              {item.icon &&
+                (item.icon.startsWith('fa-') ? (
+                  <FontAwesomeIcon
+                    icon={['fas', item.icon.replace('fa-', '') as IconName]}
+                  />
+                ) : (
+                  <span>{item.icon}</span>
+                ))}
               {item.label}
             </S.UserMenuItem>
           ))}

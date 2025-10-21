@@ -1,21 +1,13 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const LogoutIcon = () => {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M3 2.75C2.30964 2.75 1.75 3.30964 1.75 4V16C1.75 16.6904 2.30964 17.25 3 17.25H8C8.41421 17.25 8.75 17.5858 8.75 18C8.75 18.4142 8.41421 18.75 8 18.75H3C1.48122 18.75 0.25 17.5188 0.25 16V4C0.25 2.48122 1.48122 1.25 3 1.25H8C8.41421 1.25 8.75 1.58579 8.75 2C8.75 2.41421 8.41421 2.75 8 2.75H3ZM13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L18.5303 9.46967C18.8232 9.76256 18.8232 10.2374 18.5303 10.5303L14.5303 14.5303C14.2374 14.8232 13.7626 14.8232 13.4697 14.5303C13.1768 14.2374 13.1768 13.7626 13.4697 13.4697L16.1893 10.75H7C6.58579 10.75 6.25 10.4142 6.25 10C6.25 9.58579 6.58579 9.25 7 9.25H16.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z"
-        fill="currentColor"
-      />
-    </svg>
+    <FontAwesomeIcon
+      icon={faRightFromBracket}
+      style={{ width: '20px', height: '20px' }}
+    />
   );
 };
 

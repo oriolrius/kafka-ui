@@ -1,9 +1,7 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-const StarIcon: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 245">
-    <path d="m56,237 74-228 74,228L10,96h240" />
-  </svg>
-);
+const StarIcon: React.FC = () => <FontAwesomeIcon icon={faStar} />;
 
 export default StarIcon;

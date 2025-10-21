@@ -3,10 +3,14 @@ import { gitCommitPath } from 'lib/paths';
 import { useLatestVersion } from 'lib/hooks/api/latestVersion';
 import { formatTimestamp } from 'lib/dateTimeHelpers';
 import { useTimezone } from 'lib/hooks/useTimezones';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTag } from '@fortawesome/free-solid-svg-icons';
 
 import * as S from './Version.styled';
 
-const TagIcon: React.FC = () => <span style={{ fontSize: '12px' }}>🏷️</span>;
+const TagIcon: React.FC = () => (
+  <FontAwesomeIcon icon={faTag} style={{ fontSize: '12px' }} />
+);
 
 const Version: React.FC = () => {
   const { currentTimezone } = useTimezone();

@@ -18,6 +18,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'lib/hooks/useLocalStorage';
 import { ClusterColorKey } from 'theme/theme';
 import useScrollIntoView from 'lib/hooks/useScrollIntoView';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faServer,
+  faList,
+  faUsers,
+  faDatabase,
+  faPlugCircleBolt,
+  faTerminal,
+  faShieldHalved,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface ClusterMenuProps {
   name: Cluster['name'];
@@ -81,22 +91,26 @@ const ClusterMenu: FC<ClusterMenuProps> = ({
             isActive={getIsMenuItemActive(clusterBrokersPath(name))}
             to={clusterBrokersPath(name)}
             title="Brokers"
+            icon={<FontAwesomeIcon icon={faServer} />}
           />
           <MenuItem
             isActive={getIsMenuItemActive(clusterTopicsPath(name))}
             to={clusterTopicsPath(name)}
             title="Topics"
+            icon={<FontAwesomeIcon icon={faList} />}
           />
           <MenuItem
             isActive={getIsMenuItemActive(clusterConsumerGroupsPath(name))}
             to={clusterConsumerGroupsPath(name)}
             title="Consumers"
+            icon={<FontAwesomeIcon icon={faUsers} />}
           />
           {hasFeatureConfigured(ClusterFeaturesEnum.SCHEMA_REGISTRY) && (
             <MenuItem
               isActive={getIsMenuItemActive(clusterSchemasPath(name))}
               to={clusterSchemasPath(name)}
               title="Schema Registry"
+              icon={<FontAwesomeIcon icon={faDatabase} />}
             />
           )}
           {hasFeatureConfigured(ClusterFeaturesEnum.KAFKA_CONNECT) && (
@@ -108,6 +122,7 @@ const ClusterMenu: FC<ClusterMenuProps> = ({
               }
               to={kafkaConnectPath(name)}
               title="Kafka Connect"
+              icon={<FontAwesomeIcon icon={faPlugCircleBolt} />}
             />
           )}
           {hasFeatureConfigured(ClusterFeaturesEnum.KSQL_DB) && (
@@ -115,6 +130,7 @@ const ClusterMenu: FC<ClusterMenuProps> = ({
               isActive={getIsMenuItemActive(clusterKsqlDbPath(name))}
               to={clusterKsqlDbPath(name)}
               title="KSQL DB"
+              icon={<FontAwesomeIcon icon={faTerminal} />}
             />
           )}
           {(hasFeatureConfigured(ClusterFeaturesEnum.KAFKA_ACL_VIEW) ||
@@ -123,6 +139,7 @@ const ClusterMenu: FC<ClusterMenuProps> = ({
               isActive={getIsMenuItemActive(clusterACLPath(name))}
               to={clusterACLPath(name)}
               title="ACL"
+              icon={<FontAwesomeIcon icon={faShieldHalved} />}
             />
           )}
         </S.List>

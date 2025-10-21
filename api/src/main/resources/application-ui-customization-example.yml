@@ -1,5 +1,5 @@
 # Example configuration for UI customization
-# This file demonstrates how to configure the user menu and social links in Kafka UI
+# This file demonstrates how to configure the user menu, social links, and custom menu items in Kafka UI
 
 ui:
   # User menu configuration (appears at the bottom of left sidebar)
@@ -14,6 +14,19 @@ ui:
     githubUrl: "https://github.com/kafbat/kafka-ui"
     discordUrl: "https://discord.com/invite/4DWzD7pGE5"
     productHuntUrl: "https://producthunt.com/products/ui-for-apache-kafka"
+
+  # Custom menu items configuration (appears in the left sidebar above the user menu)
+  # Icons can be Font Awesome icon names (without prefix) or emojis
+  customMenuItems:
+    - label: "Scheduler"
+      url: "https://wsl.ymbihq.local:3012"
+      icon: "fa-clock"  # Font Awesome icon (will render as <FontAwesomeIcon icon={faClock} />)
+    - label: "Monitoring"
+      url: "https://monitoring.example.com"
+      icon: "fa-chart-line"  # Another Font Awesome icon
+    - label: "Documentation"
+      url: "https://docs.example.com"
+      icon: "📚"  # Emoji icon (will render as plain text)
 
 # To disable user menu entirely:
 # ui:
@@ -31,3 +44,8 @@ ui:
 #     enabled: true
 #     githubUrl: "https://github.com/your-org/your-repo"
 #     # discordUrl and productHuntUrl will use default values
+
+# Custom menu items with Font Awesome icons:
+# Icon names should be Font Awesome icon names without the 'fa-' prefix
+# Examples: "clock", "chart-line", "database", "server", "cog", "user", "bell"
+# Full list: https://fontawesome.com/icons

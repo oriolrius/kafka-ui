@@ -63,6 +63,8 @@ const Dropdown: React.FC<DropdownProps> = ({
         direction={props.direction || 'bottom'}
         offsetY={offsetY ?? 10}
         viewScroll="auto"
+        overflow="auto"
+        boundingBoxPadding="10"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
