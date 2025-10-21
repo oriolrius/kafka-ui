@@ -32,8 +32,8 @@ const KsqlDb: React.FC = () => {
       <ResourcePageHeading text="KSQL DB">
         <ActionButton
           to={clusterKsqlDbQueryRelativePath}
-          buttonType="primary"
-          buttonSize="M"
+          $buttonType="primary"
+          $buttonSize="M"
           permission={{
             resource: ResourceType.KSQL,
             action: Action.EXECUTE,

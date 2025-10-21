@@ -63,8 +63,8 @@ const Diff: React.FC = () => {
         backTo={clusterSchemasPath(clusterName)}
       />
       <BackButton
-        buttonType="secondary"
-        buttonSize="S"
+        $buttonType="secondary"
+        $buttonSize="S"
         onClick={() => navigate(-1)}
       >
         Back

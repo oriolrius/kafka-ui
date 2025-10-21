@@ -142,8 +142,8 @@ const MessagesTable: React.FC<MessagesTableProps> = ({
         <S.Pages>
           <Button
             disabled={isLive || isFetching || !nextCursor}
-            buttonType="secondary"
-            buttonSize="L"
+            $buttonType="secondary"
+            $buttonSize="L"
             onClick={paginate}
           >
             Next →

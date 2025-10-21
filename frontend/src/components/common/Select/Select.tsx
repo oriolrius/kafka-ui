@@ -70,11 +70,11 @@ const Select = <T extends object>(
     <div ref={selectContainerRef}>
       <S.Select
         role="listbox"
-        selectSize={selectSize}
+        $selectSize={selectSize}
         disabled={disabled}
         onClick={showOptionsHandler}
         onKeyDown={showOptionsHandler}
-        isThemeMode={isThemeMode}
+        $isThemeMode={isThemeMode}
         ref={ref}
         tabIndex={0}
         {...props}
@@ -83,7 +83,7 @@ const Select = <T extends object>(
           <S.SelectedOption
             role="option"
             tabIndex={0}
-            isThemeMode={isThemeMode}
+            $isThemeMode={isThemeMode}
           >
             {options.find(
               (option) => option.value === (defaultValue || selectedOption)

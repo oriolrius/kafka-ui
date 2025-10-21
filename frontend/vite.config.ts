@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
       allowedHosts: ['localhost', 'wsl.ymbihq.local', '.ymbihq.local'],
       hmr: {
         protocol: 'ws',
-        host: 'localhost',
+        clientPort: 3000,
       },
     },
     build: {
@@ -97,7 +97,7 @@ export default defineConfig(({ mode }) => {
     open: true,
     hmr: {
       protocol: 'ws',
-      host: 'localhost',
+      clientPort: 3000,
     },
     proxy: {
       '/login': {

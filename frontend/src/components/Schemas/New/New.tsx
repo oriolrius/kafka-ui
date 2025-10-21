@@ -129,8 +129,8 @@ const New: React.FC = () => {
         </div>
 
         <Button
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           type="submit"
           disabled={!isValid || isSubmitting || !isDirty}
         >

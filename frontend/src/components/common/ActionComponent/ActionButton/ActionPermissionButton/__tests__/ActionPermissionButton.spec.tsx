@@ -30,8 +30,8 @@ describe('ActionPermissionButton', () => {
   it('should render the button with the correct text, for the permission tooltip not to show', async () => {
     render(
       <ActionPermissionButton
-        buttonType="primary"
-        buttonSize="M"
+        $buttonType="primary"
+        $buttonSize="M"
         permission={validPermission}
       >
         test
@@ -50,8 +50,8 @@ describe('ActionPermissionButton', () => {
   it('should make the button disable and view the tooltip with the default text', async () => {
     render(
       <ActionPermissionButton
-        buttonType="primary"
-        buttonSize="M"
+        $buttonType="primary"
+        $buttonSize="M"
         permission={invalidPermission}
       >
         test
@@ -68,8 +68,8 @@ describe('ActionPermissionButton', () => {
 
     render(
       <ActionPermissionButton
-        buttonType="primary"
-        buttonSize="M"
+        $buttonType="primary"
+        $buttonSize="M"
         permission={invalidPermission}
         message={customTooltipText}
       />,
@@ -83,8 +83,8 @@ describe('ActionPermissionButton', () => {
   it('should render the Button but disabled cause the given role is not correct', async () => {
     render(
       <ActionPermissionButton
-        buttonType="primary"
-        buttonSize="M"
+        $buttonType="primary"
+        $buttonSize="M"
         permission={invalidPermission}
       />,
       {

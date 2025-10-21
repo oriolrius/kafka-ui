@@ -49,8 +49,8 @@ const ListPage: React.FC = () => {
       <ResourcePageHeading text="Topics">
         {!isReadOnly && (
           <ActionButton
-            buttonType="primary"
-            buttonSize="M"
+            $buttonType="primary"
+            $buttonSize="M"
             to={clusterTopicNewRelativePath}
             permission={{
               resource: ResourceType.TOPIC,

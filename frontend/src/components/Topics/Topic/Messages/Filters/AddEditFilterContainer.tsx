@@ -199,16 +199,16 @@ const AddEditFilterContainer: React.FC<AddEditFilterContainerProps> = ({
           <QuestionInfo />
           <Flexbox gap="10px">
             <Button
-              buttonSize="M"
-              buttonType="secondary"
+              $buttonSize="M"
+              $buttonType="secondary"
               type="button"
               onClick={closeSideBar}
             >
               Cancel
             </Button>
             <Button
-              buttonSize="M"
-              buttonType="primary"
+              $buttonSize="M"
+              $buttonType="primary"
               type="submit"
               disabled={!isValid || isSubmitting || !isDirty}
             >

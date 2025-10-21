@@ -59,7 +59,7 @@ const App: React.FC = () => {
           <AuthPage />
         ) : (
           <GlobalSettingsProvider>
-            <Suspense fallback={<PageLoader fullSize />}>
+            <Suspense fallback={<PageLoader $fullSize />}>
               <UserInfoRolesAccessProvider>
                 <ConfirmContextProvider>
                   <GlobalCSS />

@@ -18,7 +18,7 @@ const ErrorPage: React.FC<Props> = ({
     <S.Wrapper>
       <S.Status>{status}</S.Status>
       <S.Text>{text}</S.Text>
-      <Button buttonType="primary" buttonSize="M" to="/">
+      <Button $buttonType="primary" $buttonSize="M" to="/">
         {btnText}
       </Button>
     </S.Wrapper>

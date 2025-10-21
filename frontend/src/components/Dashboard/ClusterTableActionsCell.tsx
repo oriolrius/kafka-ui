@@ -24,8 +24,8 @@ const ClusterTableActionsCell: React.FC<Props> = ({ row }) => {
 
   return (
     <ActionCanButton
-      buttonType="secondary"
-      buttonSize="S"
+      $buttonType="secondary"
+      $buttonSize="S"
       to={clusterConfigPath(name)}
       canDoAction={hasPermissions}
       onClick={handleClick}

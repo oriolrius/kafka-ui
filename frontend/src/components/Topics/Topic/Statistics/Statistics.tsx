@@ -27,8 +27,8 @@ const Statistics: React.FC = () => {
                   await analyzeTopic.mutateAsync();
                   resetErrorBoundary();
                 }}
-                buttonType="primary"
-                buttonSize="M"
+                $buttonType="primary"
+                $buttonSize="M"
                 permission={{
                   resource: ResourceType.TOPIC,
                   action: Action.ANALYSIS_RUN,

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 interface Props {
-  selectSize: 'M' | 'L';
-  isLive?: boolean;
+  $selectSize: 'M' | 'L';
+  $isLive?: boolean;
   minWidth?: string;
   disabled?: boolean;
-  isThemeMode?: boolean;
+  $isThemeMode?: boolean;
 }
 
 interface OptionProps {
@@ -19,10 +19,10 @@ export const Select = styled.ul<Props>`
   gap: 6px;
   align-items: center;
   justify-content: space-between;
-  height: ${(props) => (props.selectSize === 'M' ? '32px' : '40px')};
+  height: ${(props) => (props.$selectSize === 'M' ? '32px' : '40px')};
   border: 1px
-    ${({ theme, disabled, isThemeMode }) => {
-      if (isThemeMode) {
+    ${({ theme, disabled, $isThemeMode }) => {
+      if ($isThemeMode) {
         return 'none';
       }
       if (disabled) {
@@ -129,9 +129,9 @@ export const Option = styled.li<OptionProps>`
   }
 `;
 
-export const SelectedOption = styled.li<{ isThemeMode?: boolean }>`
+export const SelectedOption = styled.li<{ $isThemeMode?: boolean }>`
   display: flex;
-  padding-right: ${({ isThemeMode }) => (isThemeMode ? '' : '16px')};
+  padding-right: ${({ $isThemeMode }) => ($isThemeMode ? '' : '16px')};
   list-style-position: inside;
   white-space: nowrap;
   & svg {

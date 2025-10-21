@@ -18,16 +18,16 @@ const ConfirmationModal: React.FC = () => {
         <S.Content>{context.content}</S.Content>
         <S.Footer>
           <Button
-            buttonType="secondary"
-            buttonSize="M"
+            $buttonType="secondary"
+            $buttonSize="M"
             onClick={context.cancel}
             type="button"
           >
             Cancel
           </Button>
           <Button
-            buttonType={context.dangerButton ? 'danger' : 'primary'}
-            buttonSize="M"
+            $buttonType={context.dangerButton ? 'danger' : 'primary'}
+            $buttonSize="M"
             onClick={context.confirm}
             type="button"
             inProgress={context?.isConfirming}

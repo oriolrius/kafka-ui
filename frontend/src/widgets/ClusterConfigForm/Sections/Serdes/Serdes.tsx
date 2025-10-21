@@ -102,8 +102,8 @@ const Serdes = () => {
           ))}
           <Button
             type="button"
-            buttonSize="M"
-            buttonType="secondary"
+            $buttonSize="M"
+            $buttonType="secondary"
             onClick={handleAppend}
           >
             <PlusIcon />

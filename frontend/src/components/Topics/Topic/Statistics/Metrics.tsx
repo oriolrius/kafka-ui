@@ -58,8 +58,8 @@ const Metrics: React.FC = () => {
             await cancelTopicAnalysis.mutateAsync();
             setIsAnalyzing(true);
           }}
-          buttonType="secondary"
-          buttonSize="M"
+          $buttonType="secondary"
+          $buttonSize="M"
           permission={{
             resource: ResourceType.TOPIC,
             action: Action.ANALYSIS_RUN,
@@ -117,8 +117,8 @@ const Metrics: React.FC = () => {
             await analyzeTopic.mutateAsync();
             setIsAnalyzing(true);
           }}
-          buttonType="primary"
-          buttonSize="S"
+          $buttonType="primary"
+          $buttonSize="S"
           permission={{
             resource: ResourceType.TOPIC,
             action: Action.ANALYSIS_RUN,

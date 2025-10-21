@@ -155,8 +155,8 @@ const New: React.FC = () => {
           </FormError>
         </div>
         <Button
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           type="submit"
           disabled={!isValid || isSubmitting || !isDirty}
         >

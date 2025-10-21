@@ -117,8 +117,8 @@ const QueryForm: React.FC<QueryFormProps> = ({
                 <label id="ksqlLabel">KSQL</label>
                 <Button
                   onClick={() => setValue('ksql', '')}
-                  buttonType="primary"
-                  buttonSize="S"
+                  $buttonType="primary"
+                  $buttonSize="S"
                 >
                   Clear
                 </Button>
@@ -180,8 +180,8 @@ const QueryForm: React.FC<QueryFormProps> = ({
               ))}
               <Button
                 type="button"
-                buttonSize="M"
-                buttonType="secondary"
+                $buttonSize="M"
+                $buttonType="secondary"
                 disabled={isAppendDisabled}
                 onClick={appendProperty}
               >
@@ -192,16 +192,16 @@ const QueryForm: React.FC<QueryFormProps> = ({
           </S.KSQLInputsWrapper>
           <S.ButtonsContainer>
             <Button
-              buttonType="secondary"
-              buttonSize="M"
+              $buttonType="secondary"
+              $buttonSize="M"
               disabled={fetching || !isDirty || !hasResults}
               onClick={handleClear}
             >
               Clear results
             </Button>
             <Button
-              buttonType="primary"
-              buttonSize="M"
+              $buttonType="primary"
+              $buttonSize="M"
               type="submit"
               disabled={fetching}
               onClick={handleFocus}

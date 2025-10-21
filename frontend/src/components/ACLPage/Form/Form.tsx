@@ -54,15 +54,15 @@ const ACLForm: FC<ACLFormProps> = ({ isOpen: open }) => {
       <hr />
       <S.Footer>
         <Button
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           onClick={formContext?.close}
         >
           Cancel
         </Button>
         <Button
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           onClick={() => formRef.current?.requestSubmit()}
         >
           Submit

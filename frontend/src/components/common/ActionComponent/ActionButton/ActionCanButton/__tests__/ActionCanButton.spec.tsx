@@ -10,7 +10,7 @@ describe('ActionButton', () => {
 
   it('should render the button with the correct text, for the permission tooltip not to show', async () => {
     render(
-      <ActionCanButton buttonType="primary" buttonSize="M" canDoAction>
+      <ActionCanButton $buttonType="primary" $buttonSize="M" canDoAction>
         test
       </ActionCanButton>
     );
@@ -23,7 +23,11 @@ describe('ActionButton', () => {
 
   it('should make the button disable and view the tooltip with the default text', async () => {
     render(
-      <ActionCanButton buttonType="primary" buttonSize="M" canDoAction={false}>
+      <ActionCanButton
+        $buttonType="primary"
+        $buttonSize="M"
+        canDoAction={false}
+      >
         test
       </ActionCanButton>
     );
@@ -39,8 +43,8 @@ describe('ActionButton', () => {
 
     render(
       <ActionCanButton
-        buttonType="primary"
-        buttonSize="M"
+        $buttonType="primary"
+        $buttonSize="M"
         canDoAction={false}
         message={customTooltipText}
       />

@@ -153,16 +153,16 @@ const ClusterConfigForm: React.FC<ClusterConfigFormProps> = ({
           <hr />
           <S.ButtonWrapper>
             <Button
-              buttonSize="L"
-              buttonType="secondary"
+              $buttonSize="L"
+              $buttonType="secondary"
               onClick={onReset}
               disabled={isSubmitting}
             >
               Reset
             </Button>
             <Button
-              buttonSize="L"
-              buttonType="secondary"
+              $buttonSize="L"
+              $buttonType="secondary"
               onClick={onValidate}
               disabled={isValidateDisabled}
             >
@@ -170,8 +170,8 @@ const ClusterConfigForm: React.FC<ClusterConfigFormProps> = ({
             </Button>
             <Button
               type="submit"
-              buttonSize="L"
-              buttonType="primary"
+              $buttonSize="L"
+              $buttonType="primary"
               disabled={isSubmitDisabled}
               inProgress={isSubmitting}
             >
@@ -179,8 +179,8 @@ const ClusterConfigForm: React.FC<ClusterConfigFormProps> = ({
             </Button>
             {initialValues.name && (
               <Button
-                buttonSize="L"
-                buttonType="danger"
+                $buttonSize="L"
+                $buttonType="danger"
                 inProgress={deleteCluster.isLoading}
                 onClick={confirmClusterDelete}
               >

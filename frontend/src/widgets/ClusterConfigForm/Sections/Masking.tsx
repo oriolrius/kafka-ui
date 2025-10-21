@@ -58,8 +58,8 @@ const Fields = ({ nestedIdx }: { nestedIdx: number }) => {
         <Button
           style={{ marginTop: '20px' }}
           type="button"
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           onClick={handleAppend}
         >
           <PlusIcon />
@@ -114,8 +114,8 @@ const MaskingCharReplacement = ({ nestedIdx }: { nestedIdx: number }) => {
         <Button
           style={{ marginTop: '20px' }}
           type="button"
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           onClick={handleAppend}
         >
           <PlusIcon />
@@ -210,8 +210,8 @@ const Masking = () => {
           ))}
           <Button
             type="button"
-            buttonSize="M"
-            buttonType="secondary"
+            $buttonSize="M"
+            $buttonType="secondary"
             onClick={handleAppend}
           >
             <PlusIcon />

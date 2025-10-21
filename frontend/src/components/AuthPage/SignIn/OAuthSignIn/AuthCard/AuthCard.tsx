@@ -24,8 +24,8 @@ function AuthCard({ serviceName, authPath, Icon = ServiceImage }: Props) {
         </S.ServiceDataTextContainer>
       </S.ServiceData>
       <S.ServiceButton
-        buttonSize="L"
-        buttonType="primary"
+        $buttonSize="L"
+        $buttonType="primary"
         onClick={() => {
           setIsLoading(true);
           window.location.replace(`${window.basePath}${authPath}`);

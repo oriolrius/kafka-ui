@@ -76,8 +76,8 @@ const KafkaConnect = () => {
           ))}
           <Button
             type="button"
-            buttonSize="M"
-            buttonType="secondary"
+            $buttonSize="M"
+            $buttonType="secondary"
             onClick={handleAppend}
           >
             <PlusIcon />

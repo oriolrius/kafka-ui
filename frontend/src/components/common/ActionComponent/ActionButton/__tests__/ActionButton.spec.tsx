@@ -25,8 +25,8 @@ describe('ActionButton', () => {
           action: Action.CREATE,
           resource: ResourceType.CONNECT,
         }}
-        buttonType="secondary"
-        buttonSize="S"
+        $buttonType="secondary"
+        $buttonSize="S"
       />
     );
     expect(screen.getByText(createText)).toBeInTheDocument();
@@ -39,8 +39,8 @@ describe('ActionButton', () => {
           action: Action.EDIT,
           resource: ResourceType.CONNECT,
         }}
-        buttonType="secondary"
-        buttonSize="S"
+        $buttonType="secondary"
+        $buttonSize="S"
       />
     );
     expect(screen.getByText(createText)).toBeInTheDocument();

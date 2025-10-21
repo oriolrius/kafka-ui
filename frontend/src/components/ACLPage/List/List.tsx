@@ -195,8 +195,8 @@ const ACList: React.FC = () => {
     <S.Container>
       <ResourcePageHeading text="Access Control List">
         <ActionButton
-          buttonType="primary"
-          buttonSize="M"
+          $buttonType="primary"
+          $buttonSize="M"
           onClick={openFrom}
           permission={{
             resource: ResourceType.ACL,

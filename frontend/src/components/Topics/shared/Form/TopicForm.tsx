@@ -254,16 +254,16 @@ const TopicForm: React.FC<Props> = ({
         <S.ButtonWrapper>
           <Button
             type="button"
-            buttonType="secondary"
-            buttonSize="L"
+            $buttonType="secondary"
+            $buttonSize="L"
             onClick={onCancel}
           >
             Cancel
           </Button>
           <Button
             type="submit"
-            buttonType="primary"
-            buttonSize="L"
+            $buttonType="primary"
+            $buttonSize="L"
             disabled={!isValid || isSubmitting || !isDirty}
           >
             {isEditing ? 'Update topic' : 'Create topic'}

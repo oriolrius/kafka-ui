@@ -44,7 +44,7 @@ const Fileupload: React.FC<{ name: string; label: string }> = ({
           <S.FlexGrow1>
             <Input name={name} disabled />
           </S.FlexGrow1>
-          <Button buttonType="secondary" buttonSize="L" onClick={onReset}>
+          <Button $buttonType="secondary" $buttonSize="L" onClick={onReset}>
             Reset
           </Button>
         </S.FlexRow>

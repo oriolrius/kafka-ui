@@ -112,8 +112,8 @@ const DangerZone: React.FC<DangerZoneProps> = ({
             </div>
             <div>
               <Button
-                buttonType="primary"
-                buttonSize="M"
+                $buttonType="primary"
+                $buttonSize="M"
                 type="submit"
                 disabled={!partitionsMethods.formState.isDirty}
               >
@@ -152,8 +152,8 @@ const DangerZone: React.FC<DangerZoneProps> = ({
             </div>
             <div>
               <Button
-                buttonType="primary"
-                buttonSize="M"
+                $buttonType="primary"
+                $buttonSize="M"
                 type="submit"
                 disabled={!replicationFactorMethods.formState.isDirty}
               >

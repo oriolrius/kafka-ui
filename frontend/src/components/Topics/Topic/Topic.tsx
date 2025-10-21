@@ -73,8 +73,8 @@ const Topic: React.FC = () => {
         backTo={clusterTopicsPath(clusterName)}
       >
         <ActionButton
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           onClick={openSidebar}
           disabled={isReadOnly}
           permission={{

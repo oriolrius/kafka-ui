@@ -77,8 +77,8 @@ const Details: React.FC = () => {
         backTo={clusterSchemasPath(clusterName)}
       >
         <Button
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           to={{
             pathname: clusterSchemaSchemaComparePageRelativePath,
             search: `leftVersion=${versions[0]?.version}&rightVersion=${versions[0]?.version}`,
@@ -89,8 +89,8 @@ const Details: React.FC = () => {
         {!isReadOnly && (
           <>
             <ActionButton
-              buttonSize="M"
-              buttonType="primary"
+              $buttonSize="M"
+              $buttonType="primary"
               to={clusterSchemaEditPageRelativePath}
               permission={{
                 resource: ResourceType.SCHEMA,

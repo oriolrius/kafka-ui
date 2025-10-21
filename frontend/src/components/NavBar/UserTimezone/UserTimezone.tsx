@@ -38,7 +38,7 @@ export const UserTimezone = () => {
       align="center"
       aria-label="user-timezone-dropdown"
       openBtnEl={
-        <Button buttonType="text" buttonSize="L">
+        <Button $buttonType="text" $buttonSize="L">
           <S.SelectedTimezoneContainer>
             <p>{currentTimezone.UTCOffset}</p>
             <ChevronDownIcon fill="currentColor" width="16" height="16" />

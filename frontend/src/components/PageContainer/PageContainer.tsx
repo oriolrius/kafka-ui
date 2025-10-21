@@ -64,7 +64,7 @@ const PageContainer: FC<PropsWithChildren> = ({ children }) => {
           aria-hidden="true"
           aria-label="Overlay"
         />
-        <Suspense fallback={<PageLoader fullSize />}>{children}</Suspense>
+        <Suspense fallback={<PageLoader $fullSize />}>{children}</Suspense>
       </S.Container>
     </>
   );

@@ -251,8 +251,8 @@ const SendMessage: React.FC<{ closeSidebar: () => void }> = ({
           </div>
         </S.Columns>
         <Button
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           type="submit"
           disabled={isSubmitting}
         >

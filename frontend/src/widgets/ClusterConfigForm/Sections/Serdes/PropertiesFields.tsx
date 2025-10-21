@@ -42,8 +42,8 @@ const PropertiesFields = ({ nestedId }: { nestedId: number }) => {
       <div>
         <Button
           type="button"
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           onClick={() => append({ key: '', value: '' })}
         >
           <PlusIcon />

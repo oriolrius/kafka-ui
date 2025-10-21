@@ -97,8 +97,8 @@ const List: React.FC = () => {
           <>
             <GlobalSchemaSelector />
             <ActionButton
-              buttonSize="M"
-              buttonType="primary"
+              $buttonSize="M"
+              $buttonType="primary"
               to={clusterSchemaNewRelativePath}
               permission={{
                 resource: ResourceType.SCHEMA,

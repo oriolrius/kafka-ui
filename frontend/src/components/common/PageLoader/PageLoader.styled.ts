@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export interface PageLoaderProps {
-  fullSize?: boolean;
+  $fullSize?: boolean;
 }
 
 export const Wrapper = styled.div<PageLoaderProps>`
@@ -11,5 +11,5 @@ export const Wrapper = styled.div<PageLoaderProps>`
   height: 100%;
   width: 100%;
   background-color: ${({ theme }) => theme.default.backgroundColor};
-  ${({ fullSize }) => (fullSize ? `min-height: 100vh;` : 'padding-top: 15%;')}
+  ${({ $fullSize }) => ($fullSize ? `min-height: 100vh;` : 'padding-top: 15%;')}
 `;

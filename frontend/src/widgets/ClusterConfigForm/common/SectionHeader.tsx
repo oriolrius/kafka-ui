@@ -21,7 +21,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       <S.FlexGrow1>
         <Heading level={3}>{title}</Heading>
       </S.FlexGrow1>
-      <Button buttonSize="M" buttonType="primary" onClick={onClick}>
+      <Button $buttonSize="M" $buttonType="primary" onClick={onClick}>
         {adding ? addButtonText : 'Remove from config'}
       </Button>
     </S.FlexRow>

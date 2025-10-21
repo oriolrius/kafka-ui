@@ -124,8 +124,8 @@ const Dashboard: React.FC = () => {
         </div>
         {appInfo.hasDynamicConfig && (
           <ActionCanButton
-            buttonType="primary"
-            buttonSize="M"
+            $buttonType="primary"
+            $buttonSize="M"
             to={clusterNewConfigPath}
             canDoAction={hasPermissions}
           >

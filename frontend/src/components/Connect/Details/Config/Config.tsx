@@ -85,8 +85,8 @@ const Config: React.FC = () => {
           <ErrorMessage errors={errors} name="config" />
         </div>
         <Button
-          buttonSize="M"
-          buttonType="primary"
+          $buttonSize="M"
+          $buttonType="primary"
           type="submit"
           disabled={!isValid || isSubmitting || !isDirty}
         >

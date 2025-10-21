@@ -180,8 +180,8 @@ const Form: React.FC<FormProps> = ({ schema }) => {
                 <ErrorMessage errors={errors} name="newSchema" />
               </FormError>
               <Button
-                buttonType="primary"
-                buttonSize="M"
+                $buttonType="primary"
+                $buttonSize="M"
                 type="submit"
                 disabled={!isDirty || isSubmitting || !!errors.newSchema}
               >

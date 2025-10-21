@@ -37,8 +37,8 @@ const InputCellViewMode: FC<InputCellViewModeProps> = ({
         {displayValue}
       </S.Value>
       <ActionButton
-        buttonType="primary"
-        buttonSize="S"
+        $buttonType="primary"
+        $buttonSize="S"
         aria-label="editAction"
         onClick={onEdit}
         disabled={isReadOnly}

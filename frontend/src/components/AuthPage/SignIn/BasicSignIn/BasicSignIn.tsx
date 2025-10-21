@@ -84,8 +84,8 @@ function BasicSignIn() {
           />
         </S.Fieldset>
         <Button
-          buttonSize="L"
-          buttonType="primary"
+          $buttonSize="L"
+          $buttonType="primary"
           type="submit"
           style={{ width: '100%', borderRadius: '8px' }}
           disabled={!methods.formState.isValid}

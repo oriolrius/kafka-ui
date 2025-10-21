@@ -30,16 +30,16 @@ const InputCellEditMode: FC<EditModeProps> = ({
       />
       <S.ButtonsWrapper>
         <Button
-          buttonType="primary"
-          buttonSize="S"
+          $buttonType="primary"
+          $buttonSize="S"
           aria-label="confirmAction"
           onClick={() => onSave(value)}
         >
           <CheckmarkIcon /> Save
         </Button>
         <Button
-          buttonType="primary"
-          buttonSize="S"
+          $buttonType="primary"
+          $buttonSize="S"
           aria-label="cancelAction"
           onClick={onCancel}
         >

@@ -115,16 +115,16 @@ const PreviewModal: React.FC<InfoModalProps> = ({
       </div>
       <S.ButtonWrapper>
         <Button
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           type="button"
           onClick={toggleIsOpen}
         >
           Close
         </Button>
         <Button
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           type="button"
           onClick={handleOk}
         >

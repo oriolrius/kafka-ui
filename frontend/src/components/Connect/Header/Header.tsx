@@ -18,8 +18,8 @@ const Header = () => {
         <Tooltip
           value={
             <ActionButton
-              buttonType="primary"
-              buttonSize="M"
+              $buttonType="primary"
+              $buttonSize="M"
               disabled={!connects.length}
               to={`${clusterConnectorNewPath(clusterName)}`}
               permission={{

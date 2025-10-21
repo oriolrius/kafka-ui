@@ -187,8 +187,8 @@ const Form: React.FC<FormProps> = ({ defaultValues, partitions, topics }) => {
         </FlexFieldset>
         <div>
           <Button
-            buttonSize="M"
-            buttonType="primary"
+            $buttonSize="M"
+            $buttonType="primary"
             type="submit"
             disabled={partitionsValue.length === 0}
           >

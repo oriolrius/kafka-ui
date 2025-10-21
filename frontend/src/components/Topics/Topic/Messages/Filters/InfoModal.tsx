@@ -57,8 +57,8 @@ const InfoModal: React.FC<InfoModalProps> = ({ toggleIsOpen }) => {
       </ol>
       <Flexbox justifyContent="center" margin="20px 0 0 0">
         <Button
-          buttonSize="M"
-          buttonType="secondary"
+          $buttonSize="M"
+          $buttonType="secondary"
           type="button"
           onClick={toggleIsOpen}
         >

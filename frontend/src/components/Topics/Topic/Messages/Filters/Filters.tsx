@@ -178,8 +178,8 @@ const Filters: React.FC<FiltersProps> = ({
           />
           <Button
             type="submit"
-            buttonType="secondary"
-            buttonSize="M"
+            $buttonType="secondary"
+            $buttonSize="M"
             onClick={handleRefresh}
             style={{ fontWeight: 500 }}
           >
@@ -196,8 +196,8 @@ const Filters: React.FC<FiltersProps> = ({
         padding="8px 0 5px"
       >
         <Button
-          buttonType="secondary"
-          buttonSize="M"
+          $buttonType="secondary"
+          $buttonSize="M"
           onClick={() => setCreatedEditedSmartId(ADD_FILTER_ID)}
         >
           <PlusIcon />
