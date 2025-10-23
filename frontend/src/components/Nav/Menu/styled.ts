@@ -74,7 +74,7 @@ export const StatusIcon = styled.circle.attrs({
   cy: 3,
   r: 3,
   role: 'status-circle',
-})<{ status: ServerStatus }>(({ theme, status }) => {
+})<{ $status: ServerStatus }>(({ theme, $status }) => {
   const statusColor: {
     [k in ServerStatus]: string;
   } = {
@@ -85,7 +85,7 @@ export const StatusIcon = styled.circle.attrs({
   };
 
   return css`
-    fill: ${statusColor[status]};
+    fill: ${statusColor[$status]};
   `;
 });
 

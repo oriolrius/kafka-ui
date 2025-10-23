@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface Props {
   $selectSize: 'M' | 'L';
   $isLive?: boolean;
-  minWidth?: string;
+  $minWidth?: string;
   disabled?: boolean;
   $isThemeMode?: boolean;
 }
@@ -39,7 +39,7 @@ export const Select = styled.ul<Props>`
   padding-right: 12px;
   color: ${({ theme, disabled }) =>
     disabled ? theme.select.color.disabled : theme.select.color.normal};
-  min-width: ${({ minWidth }) => minWidth || 'auto'};
+  min-width: ${({ $minWidth }) => $minWidth || 'auto'};
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:hover {
     color: ${({ theme, disabled }) =>

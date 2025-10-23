@@ -386,11 +386,11 @@ function Table<TData>({
             {table.getRowModel().rows.map((row) => (
               <React.Fragment key={row.id}>
                 <S.Row
-                  expanded={row.getIsExpanded()}
+                  $expanded={row.getIsExpanded()}
                   onClick={handleRowClick(row)}
                   onMouseOver={onRowHover ? handleRowHover(row) : undefined}
                   onMouseLeave={onMouseLeave ? handleMouseLeave : undefined}
-                  clickable={
+                  $clickable={
                     !enableRowSelection &&
                     (row.getCanExpand() || onRowClick !== undefined)
                   }
@@ -435,7 +435,7 @@ function Table<TData>({
                     )}
                 </S.Row>
                 {row.getIsExpanded() && SubComponent && (
-                  <S.Row expanded>
+                  <S.Row $expanded>
                     <td colSpan={row.getVisibleCells().length + 2}>
                       <S.ExpandedRowInfo>
                         <SubComponent row={row} />

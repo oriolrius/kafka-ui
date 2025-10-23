@@ -60,7 +60,12 @@ public class BrokersController extends AbstractController implements BrokersApi,
             brokerService.getBrokerMetrics(getCluster(clusterName), id)
                 .map(clusterMapper::toBrokerMetrics)
                 .map(ResponseEntity::ok)
-                .onErrorReturn(ResponseEntity.notFound().build())
+                .onErrorResume(e -> {
+                  log.warn("Failed to get broker metrics for broker {} in cluster {}: {}",
+                      id, clusterName, e.getMessage());
+                  // Return empty metrics instead of 404 to avoid JSON parsing errors on frontend
+                  return Mono.just(ResponseEntity.ok(new BrokerMetricsDTO()));
+                })
         )
         .doOnEach(sig -> audit(context, sig));
   }

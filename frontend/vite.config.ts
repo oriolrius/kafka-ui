@@ -31,6 +31,9 @@ export default defineConfig(({ mode }) => {
 
   const defaultConfig: UserConfigExport = {
     plugins: isDevMode ? devPlugins : prodPlugins,
+    resolve: {
+      dedupe: ['react', 'react-dom', 'styled-components'],
+    },
     server: {
       port: 3000,
       host: true,

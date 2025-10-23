@@ -1,5 +1,21 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
+// Re-export shared styled components for backward compatibility
+export {
+  EditorContainer,
+  LLMPanelContainer,
+  LLMPanelHeader,
+  LLMPanelContent,
+  ChatContainer,
+  ChatMessage,
+  ChatInputWrapper,
+  ArtifactContainer,
+  ArtifactActions,
+  LLMLayoutWrapper,
+  ApiKeyBanner,
+} from 'components/Schemas/shared.styled';
+
+// Edit-specific styled components
 export const EditWrapper = styled.div`
   padding: 16px;
   padding-top: 0;
@@ -32,19 +48,3 @@ export const EditorsWrapper = styled.div`
     flex-grow: 1;
   }
 `;
-
-export const EditorContainer = styled.div(
-  ({ theme }) => css`
-    border: 1px solid ${theme.layout.stuffBorderColor};
-    border-radius: 8px;
-    margin-bottom: 16px;
-    padding: 16px;
-    & > h4 {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
-      padding-bottom: 16px;
-      color: ${theme.heading.h4};
-    }
-  `
-);

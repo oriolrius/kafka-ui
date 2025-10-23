@@ -27,7 +27,7 @@ describe('Cluster Styled Components', () => {
     it('should check the rendering and correct Styling when it is online', () => {
       render(
         <svg>
-          <S.StatusIcon status={ServerStatus.ONLINE} />
+          <S.StatusIcon $status={ServerStatus.ONLINE} />
         </svg>
       );
 
@@ -39,7 +39,7 @@ describe('Cluster Styled Components', () => {
     it('should check the rendering and correct Styling when it is offline', () => {
       render(
         <svg>
-          <S.StatusIcon status={ServerStatus.OFFLINE} />
+          <S.StatusIcon $status={ServerStatus.OFFLINE} />
         </svg>
       );
       expect(getStatusCircle()).toHaveStyle(
@@ -50,7 +50,7 @@ describe('Cluster Styled Components', () => {
     it('should check the rendering and correct Styling when it is Initializing', () => {
       render(
         <svg>
-          <S.StatusIcon status={ServerStatus.INITIALIZING} />
+          <S.StatusIcon $status={ServerStatus.INITIALIZING} />
         </svg>
       );
       expect(getStatusCircle()).toHaveStyle(

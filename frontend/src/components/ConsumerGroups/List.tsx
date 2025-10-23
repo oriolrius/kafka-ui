@@ -103,7 +103,7 @@ const List = () => {
   return (
     <>
       <ResourcePageHeading text="Consumers" />
-      <ControlPanelWrapper hasInput>
+      <ControlPanelWrapper $hasInput>
         <Search placeholder="Search by Consumer Group ID" />
       </ControlPanelWrapper>
       <Table

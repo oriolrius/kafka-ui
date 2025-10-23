@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
 import {
@@ -26,6 +26,11 @@ import {
   useUpdateSchemaCompatibilityLayer,
 } from 'lib/hooks/api/schemas';
 import ResourcePageHeading from 'components/common/ResourcePageHeading/ResourcePageHeading';
+import { hasApiKey, DEFAULT_MODEL_ID } from 'lib/services/openrouter';
+import LLMApiKeyConfig from 'components/Schemas/LLMApiKeyConfig';
+import LLMModelSelector from 'components/Schemas/LLMModelSelector';
+import LLMChatPanel from 'components/Schemas/LLMChatPanel';
+import LLMSchemaArtifact from 'components/Schemas/LLMSchemaArtifact';
 
 import * as S from './Edit.styled';
 
@@ -39,6 +44,13 @@ const Form: React.FC<FormProps> = ({ schema }) => {
   const { mutateAsync: createSchema } = useCreateSchema(clusterName);
   const { mutateAsync: updateCompatibilityLayer } =
     useUpdateSchemaCompatibilityLayer({ clusterName, subject });
+
+  // LLM integration state
+  const [apiKeyConfigured, setApiKeyConfigured] = useState(hasApiKey());
+  const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL_ID);
+  const [proposedSchema, setProposedSchema] = useState('');
+  const isAvroSchema = schema?.schemaType === SchemaType.AVRO;
+  const llmEnabled = isAvroSchema && apiKeyConfigured;
 
   const formatedSchema = React.useMemo(() => {
     return schema?.schemaType === SchemaType.PROTOBUF
@@ -68,7 +80,9 @@ const Form: React.FC<FormProps> = ({ schema }) => {
     formState: { isDirty, isSubmitting, dirtyFields, errors },
     control,
     handleSubmit,
+    setValue,
   } = methods;
+
   const onSubmit = async (props: NewSchemaSubjectRaw) => {
     if (!schema) return;
 
@@ -90,6 +104,27 @@ const Form: React.FC<FormProps> = ({ schema }) => {
     }
 
     navigate(clusterSchemaPath(clusterName, subject));
+  };
+
+  const handleApiKeyConfigured = () => {
+    setApiKeyConfigured(true);
+  };
+
+  const handleSchemaProposal = (newProposedSchema: string) => {
+    setProposedSchema(newProposedSchema);
+  };
+
+  const handleCopyToEditor = (schemaToCopy: string) => {
+    setValue('newSchema', schemaToCopy, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
+
+  const schemaContext = {
+    subject,
+    schema: formatedSchema,
+    schemaType: schema?.schemaType || '',
   };
 
   return (
@@ -143,25 +178,90 @@ const Form: React.FC<FormProps> = ({ schema }) => {
                 )}
               />
             </div>
-          </div>
-          <S.EditorsWrapper>
-            <div>
-              <S.EditorContainer>
-                <h4>Latest schema</h4>
-                <Editor
-                  schemaType={schema?.schemaType}
-                  isFixedHeight
-                  readOnly
-                  height="372px"
-                  value={formatedSchema}
-                  name="latestSchema"
-                  highlightActiveLine={false}
+
+            {isAvroSchema && (
+              <div>
+                <LLMModelSelector
+                  selectedModel={selectedModel}
+                  onModelChange={setSelectedModel}
+                  disabled={!apiKeyConfigured}
                 />
-              </S.EditorContainer>
+              </div>
+            )}
+          </div>
+
+          {!isAvroSchema && (
+            <div
+              style={{
+                padding: '12px 16px',
+                backgroundColor: 'rgba(255, 165, 0, 0.1)',
+                border: '1px solid rgba(255, 165, 0, 0.3)',
+                borderRadius: '8px',
+                fontSize: '14px',
+                marginBottom: '16px',
+              }}
+            >
+              LLM Schema Assistant is currently only available for AVRO schemas
             </div>
-            <div>
+          )}
+
+          {isAvroSchema && !apiKeyConfigured && (
+            <LLMApiKeyConfig onApiKeyConfigured={handleApiKeyConfigured} />
+          )}
+
+          {!isAvroSchema && (
+            <S.EditorsWrapper>
+              <div>
+                <S.EditorContainer>
+                  <h4>Latest schema</h4>
+                  <Editor
+                    schemaType={schema?.schemaType}
+                    isFixedHeight
+                    readOnly
+                    height="372px"
+                    value={formatedSchema}
+                    name="latestSchema"
+                    highlightActiveLine={false}
+                  />
+                </S.EditorContainer>
+              </div>
+
+              <div>
+                <S.EditorContainer>
+                  <h4>New schema</h4>
+                  <Controller
+                    control={control}
+                    name="newSchema"
+                    render={({ field: { name, onChange, value } }) => (
+                      <Editor
+                        schemaType={schema?.schemaType}
+                        readOnly={isSubmitting}
+                        defaultValue={value}
+                        name={name}
+                        onChange={onChange}
+                      />
+                    )}
+                  />
+                </S.EditorContainer>
+                <FormError>
+                  <ErrorMessage errors={errors} name="newSchema" />
+                </FormError>
+                <Button
+                  $buttonType="primary"
+                  $buttonSize="M"
+                  type="submit"
+                  disabled={!isDirty || isSubmitting || !!errors.newSchema}
+                >
+                  Submit
+                </Button>
+              </div>
+            </S.EditorsWrapper>
+          )}
+
+          {isAvroSchema && (
+            <S.LLMLayoutWrapper>
               <S.EditorContainer>
-                <h4>New schema</h4>
+                <h4>Schema</h4>
                 <Controller
                   control={control}
                   name="newSchema"
@@ -175,20 +275,34 @@ const Form: React.FC<FormProps> = ({ schema }) => {
                     />
                   )}
                 />
+                <FormError>
+                  <ErrorMessage errors={errors} name="newSchema" />
+                </FormError>
+                <Button
+                  $buttonType="primary"
+                  $buttonSize="M"
+                  type="submit"
+                  disabled={!isDirty || isSubmitting || !!errors.newSchema}
+                  style={{ marginTop: '16px' }}
+                >
+                  Submit
+                </Button>
               </S.EditorContainer>
-              <FormError>
-                <ErrorMessage errors={errors} name="newSchema" />
-              </FormError>
-              <Button
-                $buttonType="primary"
-                $buttonSize="M"
-                type="submit"
-                disabled={!isDirty || isSubmitting || !!errors.newSchema}
-              >
-                Submit
-              </Button>
-            </div>
-          </S.EditorsWrapper>
+
+              <LLMSchemaArtifact
+                proposedSchema={proposedSchema}
+                onCopyToEditor={handleCopyToEditor}
+                disabled={!llmEnabled}
+              />
+
+              <LLMChatPanel
+                disabled={!llmEnabled}
+                selectedModel={selectedModel}
+                schemaContext={schemaContext}
+                onSchemaProposal={handleSchemaProposal}
+              />
+            </S.LLMLayoutWrapper>
+          )}
         </form>
       </S.EditWrapper>
     </FormProvider>

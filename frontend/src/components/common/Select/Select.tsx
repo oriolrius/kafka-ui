@@ -10,6 +10,7 @@ export interface SelectProps<T> {
   name?: string;
   selectSize?: 'M' | 'L';
   minWidth?: string;
+  $minWidth?: string;
   value?: T;
   defaultValue?: T;
   placeholder?: string;
@@ -35,6 +36,8 @@ const Select = <T extends object>(
     disabled = false,
     onChange,
     isThemeMode,
+    minWidth,
+    $minWidth,
     ...props
   }: SelectProps<T>,
   ref?: React.Ref<HTMLUListElement>
@@ -71,6 +74,7 @@ const Select = <T extends object>(
       <S.Select
         role="listbox"
         $selectSize={selectSize}
+        $minWidth={$minWidth || minWidth}
         disabled={disabled}
         onClick={showOptionsHandler}
         onKeyDown={showOptionsHandler}

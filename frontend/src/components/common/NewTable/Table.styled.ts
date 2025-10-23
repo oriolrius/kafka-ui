@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 
 export const ExpaderButton = styled.svg<{
   $disabled: boolean;
-  getIsExpanded: boolean;
+  $getIsExpanded: boolean;
 }>(
-  ({ theme: { table }, $disabled, getIsExpanded }) => css`
+  ({ theme: { table }, $disabled, $getIsExpanded }) => css`
     & > path {
       fill: ${table.expander[
-        ($disabled && 'disabled') || (getIsExpanded && 'active') || 'normal'
+        ($disabled && 'disabled') || ($getIsExpanded && 'active') || 'normal'
       ]};
     }
     &:hover > path {
@@ -152,14 +152,14 @@ export const TableHeaderFilter = styled.div`
 `;
 
 interface RowProps {
-  clickable?: boolean;
-  expanded?: boolean;
+  $clickable?: boolean;
+  $expanded?: boolean;
 }
 
 export const Row = styled.tr<RowProps>(
-  ({ theme: { table }, expanded, clickable }) => `
-  cursor: ${clickable ? 'pointer' : 'default'};
-  background-color: ${table.tr.backgroundColor[expanded ? 'hover' : 'normal']};
+  ({ theme: { table }, $expanded, $clickable }) => `
+  cursor: ${$clickable ? 'pointer' : 'default'};
+  background-color: ${table.tr.backgroundColor[$expanded ? 'hover' : 'normal']};
   &:hover {
     background-color: ${table.tr.backgroundColor.hover};
   }

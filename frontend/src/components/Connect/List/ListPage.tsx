@@ -16,7 +16,7 @@ const ListPage: React.FC = () => {
   return (
     <>
       <ConnectorsStatistics connectors={data ?? []} isLoading={isLoading} />
-      <S.Search hasInput>
+      <S.Search $hasInput>
         <Search placeholder="Search by Connect Name, Status or Type" />
       </S.Search>
       <Suspense fallback={<PageLoader />}>

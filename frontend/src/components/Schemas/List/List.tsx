@@ -110,7 +110,7 @@ const List: React.FC = () => {
           </>
         )}
       </ResourcePageHeading>
-      <ControlPanelWrapper hasInput>
+      <ControlPanelWrapper $hasInput>
         <Search placeholder="Search by Schema Name" />
       </ControlPanelWrapper>
       {isInitialLoading || isError ? (

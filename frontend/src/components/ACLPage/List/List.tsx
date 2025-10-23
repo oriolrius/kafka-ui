@@ -206,7 +206,7 @@ const ACList: React.FC = () => {
           <PlusIcon /> Create ACL
         </ActionButton>
       </ResourcePageHeading>
-      <ControlPanelWrapper hasInput>
+      <ControlPanelWrapper $hasInput>
         <Search
           placeholder="Search by Principal Name"
           value={search}

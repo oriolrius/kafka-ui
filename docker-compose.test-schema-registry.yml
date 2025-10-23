@@ -1,0 +1,68 @@
+services:
+  kafka:
+    image: apache/kafka:4.1.0
+    hostname: test-kafka
+    container_name: test-kafka
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka-test-data:/var/lib/kafka/data
+    environment:
+      # KRaft Configuration (no Zookeeper)
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_NODE_ID: "1"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@test-kafka:9091"
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+
+      # Listeners - PLAINTEXT only (no SSL, no auth)
+      KAFKA_LISTENERS: CONTROLLER://test-kafka:9091,PLAINTEXT://test-kafka:29092,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://test-kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+      # Replication factors (single broker)
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+
+      # KRaft cluster ID (auto-generated on first start)
+      CLUSTER_ID: 'test-kafka-cluster-id-123456'
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server test-kafka:29092"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:8.1.0
+    hostname: test-schema-registry
+    container_name: test-schema-registry
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8085:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: test-schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'test-kafka:29092'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_KAFKASTORE_TOPIC: _schemas
+      SCHEMA_REGISTRY_SCHEMA_REGISTRY_GROUP_ID: schema-registry
+      SCHEMA_REGISTRY_LEADER_ELIGIBILITY: 'true'
+      SCHEMA_REGISTRY_MODE_MUTABILITY: 'true'
+      SCHEMA_REGISTRY_LOG4J_ROOT_LOGLEVEL: INFO
+    healthcheck:
+      test: curl -f http://localhost:8081/ || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  kafka-test-data:
+    driver: local
+
+networks:
+  default:
+    name: kafka-test-network

@@ -38,7 +38,7 @@ const MenuTab: FC<MenuTabProps> = ({
     <S.MenuItem $variant="primary" $isActive={isActive}>
       <S.ContentWrapper onClick={handleNameClick} style={{ cursor: 'pointer' }}>
         <S.StatusIconWrapper>
-          <S.StatusIcon status={status} aria-label="status">
+          <S.StatusIcon $status={status} aria-label="status">
             <title>{status}</title>
           </S.StatusIcon>
         </S.StatusIconWrapper>

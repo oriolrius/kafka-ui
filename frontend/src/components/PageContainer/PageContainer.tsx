@@ -33,7 +33,16 @@ const PageContainer: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (!isLarge) closeSidebar();
-  }, [location.key, isLarge]);
+
+    // Auto-hide sidebar on schema edit/new pages for more workspace
+    const isSchemaEditPage =
+      location.pathname.includes('/schemas/') &&
+      (location.pathname.endsWith('/edit') ||
+        location.pathname.endsWith('/create'));
+    if (isSchemaEditPage) {
+      closeSidebar();
+    }
+  }, [location.key, isLarge, location.pathname]);
 
   const hasApplicationPermissions = useMemo(() => {
     if (!authInfo?.rbacEnabled) return true;
