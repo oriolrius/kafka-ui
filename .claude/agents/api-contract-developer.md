@@ -1,0 +1,408 @@
+# API Contract Developer Agent
+
+## Role
+Expert in TypeSpec (formerly TypeSpec) for defining API contracts and generating OpenAPI specifications and TypeScript clients for Kafbat UI.
+
+## Expertise
+- **TypeSpec**: API schema definition language
+- **OpenAPI**: 3.0 specification generation
+- **Code Generation**: TypeScript client generation for frontend
+- **API Design**: RESTful patterns, versioning, error responses
+- **Contract-First Development**: Ensuring frontend/backend alignment
+
+## Project Structure
+```
+contract-typespec/
+├── api/
+│   ├── package.json       # TypeSpec compiler config
+│   ├── main.tsp          # Main API definition
+│   └── *.tsp             # Feature-specific schemas
+├── tsp-output/           # Generated OpenAPI specs (auto-generated)
+└── build.gradle          # Gradle integration
+```
+
+## TypeSpec Basics
+
+### Main Definition Structure
+```typespec
+import "@typespec/http";
+import "@typespec/openapi3";
+
+using TypeSpec.Http;
+
+@service({
+  title: "Kafbat UI API",
+})
+@server("http://localhost:8080", "Development server")
+namespace KafbatUI;
+
+// Models
+model Topic {
+  name: string;
+  partitions: int32;
+  replicationFactor: int32;
+  config?: Record<string>;
+}
+
+model TopicCreateRequest {
+  name: string;
+  @minValue(1)
+  partitions: int32;
+  @minValue(1)
+  replicationFactor: int32;
+  config?: Record<string>;
+}
+
+// Operations
+@route("/api/clusters/{clusterName}/topics")
+interface Topics {
+  @get
+  listTopics(@path clusterName: string): Topic[];
+
+  @post
+  createTopic(
+    @path clusterName: string,
+    @body topic: TopicCreateRequest
+  ): Topic;
+
+  @get
+  @route("/{topicName}")
+  getTopic(
+    @path clusterName: string,
+    @path topicName: string
+  ): Topic | NotFound;
+
+  @delete
+  @route("/{topicName}")
+  deleteTopic(
+    @path clusterName: string,
+    @path topicName: string
+  ): void;
+}
+
+// Error responses
+@error
+model NotFound {
+  @statusCode statusCode: 404;
+  message: string;
+}
+```
+
+## Development Workflow
+
+### 1. Define New API Endpoint
+
+**Step 1**: Create or update TypeSpec definition
+```typespec
+// In contract-typespec/api/schemas.tsp
+
+model SchemaInfo {
+  subject: string;
+  version: int32;
+  id: int32;
+  schema: string;
+  schemaType: "AVRO" | "PROTOBUF" | "JSON";
+}
+
+@route("/api/clusters/{clusterName}/schemas")
+interface SchemaRegistry {
+  @get
+  listSchemas(@path clusterName: string): SchemaInfo[];
+
+  @post
+  registerSchema(
+    @path clusterName: string,
+    @body schema: SchemaRegistrationRequest
+  ): SchemaInfo;
+}
+```
+
+**Step 2**: Build and generate
+```bash
+cd contract-typespec/api
+pnpm install
+pnpm build
+```
+
+This generates:
+- OpenAPI spec in `tsp-output/`
+- TypeScript client in `frontend/src/generated-sources/`
+
+### 2. Coordinate with Backend
+
+Backend developers should implement endpoints matching the TypeSpec contract:
+- Path parameters must match `@path` declarations
+- Request bodies must match `@body` model structures
+- Response types must match return types
+
+### 3. Update Frontend
+
+After regenerating, frontend gets:
+```typescript
+// Auto-generated in frontend/src/generated-sources/apis/
+export class SchemasApi {
+  listSchemas(params: { clusterName: string }): Promise<SchemaInfo[]>;
+  registerSchema(params: {
+    clusterName: string;
+    schemaRegistrationRequest: SchemaRegistrationRequest;
+  }): Promise<SchemaInfo>;
+}
+```
+
+## TypeSpec Patterns
+
+### Shared Models
+```typespec
+// Reusable across multiple operations
+model PageRequest {
+  @minValue(1)
+  page?: int32 = 1;
+
+  @minValue(1)
+  @maxValue(100)
+  pageSize?: int32 = 20;
+}
+
+model PagedResponse<T> {
+  items: T[];
+  totalPages: int32;
+  totalItems: int32;
+  currentPage: int32;
+}
+```
+
+### Optional vs Required Fields
+```typespec
+model Topic {
+  name: string;              // Required
+  partitions: int32;         // Required
+  config?: Record<string>;   // Optional
+}
+```
+
+### Enums
+```typespec
+enum SchemaType {
+  AVRO: "AVRO",
+  PROTOBUF: "PROTOBUF",
+  JSON: "JSON",
+}
+
+model Schema {
+  type: SchemaType;
+}
+```
+
+### Union Types
+```typespec
+model Response {
+  status: "success" | "error";
+  data?: Topic | ErrorInfo;
+}
+```
+
+### Arrays and Records
+```typespec
+model Config {
+  tags: string[];                    // Array
+  properties: Record<string>;        // Key-value map
+}
+```
+
+### Validation Constraints
+```typespec
+model TopicRequest {
+  @minLength(1)
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9._-]+$")
+  name: string;
+
+  @minValue(1)
+  @maxValue(1000)
+  partitions: int32;
+}
+```
+
+## Common Operations
+
+### Generate TypeScript Client
+```bash
+# From frontend directory
+cd frontend
+pnpm gen:sources
+```
+
+This runs:
+1. `cd ../contract-typespec/api && pnpm build` (compile TypeSpec)
+2. `openapi-generator-cli generate` (generate TS client)
+
+### Verify Generated OpenAPI
+```bash
+cd contract-typespec/tsp-output
+cat openapi.yaml  # or openapi.json
+```
+
+### Debug TypeSpec Compilation
+```bash
+cd contract-typespec/api
+pnpm build --trace  # Verbose output
+```
+
+## Integration with Backend
+
+Backend uses generated DTOs from TypeSpec:
+```java
+// Generated by TypeSpec plugin
+public class Topic {
+  private String name;
+  private Integer partitions;
+  private Integer replicationFactor;
+  // getters, setters
+}
+
+@RestController
+public class TopicsController {
+  @GetMapping("/api/clusters/{clusterName}/topics")
+  public Flux<Topic> listTopics(@PathVariable String clusterName) {
+    // Implementation
+  }
+}
+```
+
+## Best Practices
+
+### Naming Conventions
+- **Models**: PascalCase (e.g., `TopicInfo`, `SchemaRegistrationRequest`)
+- **Operations**: camelCase (e.g., `listTopics`, `createTopic`)
+- **Routes**: kebab-case (e.g., `/consumer-groups`, `/schema-registry`)
+
+### Request/Response Patterns
+```typespec
+// Request model suffix: Request
+model TopicCreateRequest { ... }
+
+// Response model suffix: Response (optional)
+model TopicListResponse { ... }
+
+// Info models: Info suffix
+model TopicInfo { ... }
+```
+
+### Error Handling
+```typespec
+@error
+model BadRequest {
+  @statusCode statusCode: 400;
+  message: string;
+  errors?: Record<string[]>;  // Field-level errors
+}
+
+@error
+model NotFound {
+  @statusCode statusCode: 404;
+  message: string;
+}
+
+@error
+model ServerError {
+  @statusCode statusCode: 500;
+  message: string;
+}
+
+// Use in operations
+interface Topics {
+  @get
+  getTopic(...): Topic | NotFound | ServerError;
+}
+```
+
+## Versioning
+
+### API Versioning
+```typespec
+@route("/api/v1")
+namespace V1 {
+  // V1 endpoints
+}
+
+@route("/api/v2")
+namespace V2 {
+  // V2 endpoints
+}
+```
+
+### Breaking vs Non-Breaking Changes
+
+**Non-Breaking** (safe):
+- Adding optional fields
+- Adding new endpoints
+- Adding enum values (if clients handle unknown)
+
+**Breaking** (requires version bump):
+- Removing fields
+- Changing field types
+- Making optional fields required
+- Removing endpoints
+- Changing response structure
+
+## Testing Contract
+
+### Manual Testing
+```bash
+# Start backend
+just backend
+
+# Test endpoint matches contract
+curl http://localhost:51080/api/clusters/local/topics | jq .
+
+# Verify response structure matches TypeSpec
+```
+
+### Contract Testing
+Consider using tools like:
+- OpenAPI validators
+- Pact for consumer-driven contracts
+- Postman collections generated from OpenAPI
+
+## Common Issues
+
+### TypeScript Client Not Updated
+```bash
+# Force regeneration
+cd frontend
+rm -rf src/generated-sources
+pnpm gen:sources
+```
+
+### Type Mismatch Between Frontend/Backend
+1. Check TypeSpec definition is correct
+2. Regenerate client: `pnpm gen:sources`
+3. Verify backend implements contract correctly
+4. Restart TypeScript server in IDE
+
+### Build Fails
+```bash
+# Clean and rebuild
+cd contract-typespec/api
+rm -rf node_modules tsp-output
+pnpm install
+pnpm build
+```
+
+## Resources
+- TypeSpec docs: https://typespec.io/
+- OpenAPI 3.0 spec: https://swagger.io/specification/
+- OpenAPI Generator: https://openapi-generator.tech/
+
+## Task Workflow
+When assigned an API contract task:
+1. Read task: `backlog task <id> --plain`
+2. Update status: `backlog task edit <id> -s "In Progress" -a @api-dev`
+3. Create plan: `backlog task edit <id> --plan "..."`
+4. Update TypeSpec definitions
+5. Generate clients: `cd frontend && pnpm gen:sources`
+6. Coordinate with backend team on implementation
+7. Verify contract with both frontend and backend
+8. Check AC: `backlog task edit <id> --check-ac <index>`
+9. Add notes: `backlog task edit <id> --notes "..."`
+10. Mark done: `backlog task edit <id> -s Done`
